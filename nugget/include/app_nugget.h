@@ -262,6 +262,43 @@ enum nugget_ap_uart_passthru_cfg {
  * @errors             APP_ERROR_BOGUS_ARGS
  */
 
+#define NUGGET_PARAM_RDD_CFG 0x000e
+/*
+ * Set / Get Board ID
+ *
+ * This sets or gets the Board ID of the device.
+ *
+ * @param args         <none>  OR   nugget_app_board_id
+ * @param arg_len      0       OR   sizeof nugget_app_board_id
+ * @param reply        struct nugget_app_board_id
+ * @param reply_len    sizeof struct nugget_app_board_id
+ *
+ * @errors             APP_ERROR_BOGUS_ARGS
+ */
+struct nugget_app_board_id {
+  uint32_t type;
+  uint32_t flag;
+  uint32_t inv;                         /* must equal ~type when setting */
+} __packed;
+#define NUGGET_PARAM_BOARD_ID 0x000f
+
+/*
+ * Enable/Disable the RDD SuzyQable Deteaction
+ *
+ * This always returns the current state of the RDD SuezyQable detection
+ * feature.
+ *
+ * The AP can request that the RDD SuezyQable detection to be disabled (0) or
+ * enabled (1).
+ *
+ * @param args         0     OR   1
+ * @param arg_len      0     OR   1 byte
+ * @param reply        0     OR   1 current state
+ * @param reply_len    1 byte
+ *
+ * @errors             APP_ERROR_BOGUS_ARGS
+ */
+
 /****************************************************************************/
 /* Test related commands */
 
@@ -327,10 +364,7 @@ struct nugget_app_low_power_stats {
 /* UNIMPLEMENTED */
 
 /****************************************************************************/
-/* These are bringup / debug functions only.
- *
- * TODO(b/65067435): Remove all of these.
- */
+/* These are bringup / debug functions only. */
 
 #define NUGGET_PARAM_READ32 0xF000
 /*
