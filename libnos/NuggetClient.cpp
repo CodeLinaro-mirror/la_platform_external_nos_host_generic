@@ -15,11 +15,8 @@
  */
 
 #include <nos/NuggetClient.h>
-
 #include <limits>
-
 #include <nos/transport.h>
-
 #include <application.h>
 
 namespace nos {
